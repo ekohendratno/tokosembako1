@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{title}}</title>
+
+    <link media="all" type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <script src="{{url_for('static', filename='js/sweetalert/sweetalert.min.js')}}"></script>
+
+    <!--Icon Fonts-->
+    <script defer src="{{url_for('static', filename='js/fontawesome/js/all.js')}}"></script>
+    <!-- jQuery Load -->
+    <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Bootstrap JS -->
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    
+    <!-- SweetAlert JS -->
+    <script src="{{url_for('static', filename='js/sweetalert/sweetalert.min.js')}}"></script>
+
+    <style>
+        .navbar-default{
+            box-shadow: 0px 1px 1px 2px #bdbdbdbd;
+        }
+        .navbar-default .navbar-collapse ul.nav li a, .navbar-inverse .navbar-collapse ul.nav li a {
+        }
+
+        .navbar-inverse {
+            background-color: #778e9a !important;
+            border-color: #f2f2f2;
+            box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 11%);
+        }
+
+        .navbar-inverse .navbar-nav>li>a {
+            color: #f2f2f2;
+        }
+    </style>
+
+
+
+</head>
+
+<body data-spy="scroll" data-offset="20" data-target="#navbar">
+    <!-- Nav Menu Section -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-spy="affix" data-offset-top="50">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    PT. Toko Bu Yus
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <!-- Add your navigation links here -->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <!-- Nav Menu Section End -->
+
+    {% block content %}
+    {% endblock %}
+
+    <div id="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>© 2024 PT: Toko Bu Yus.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright Section End-->
+
+    <div class="cookies-consent-container active" data-period="forever" style="display: none;">
+        <div class="cookies-consent-wrap">
+            <div class="cookies-consent full-width">
+                <div class="cookies-consent-text raw-html">
+                    We use cookies to improve your experience on our website
+                </div>
+                <div class="cookies-consent-buttons">
+                    <button type="button" class="button accept-button" onclick="acceptCookies()">
+                        Accept
+                    </button>
+                    <button type="button" class="button decline-button" onclick="declineCookies()">
+                        Decline
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        #copyright {
+            width: 100%;
+            margin-top: 40px;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        .cookies-consent-container {
+            background-color: #fff;
+            color: #000;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cookies-consent-wrap {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cookies-consent {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cookies-consent-text {
+            flex: 1;
+        }
+
+        .cookies-consent-buttons button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .accept-button {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .decline-button {
+            background-color: #FF3D00;
+            color: #fff;
+        }
+    </style>
+    <script>
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        function acceptCookies() {
+            setCookie("cookies_accepted", "true", 365); // Set cookie for 1 year (365 days)
+            hideCookieBanner();
+        }
+
+        function declineCookies() {
+            setCookie("cookies_accepted", "false", 365); // Set cookie for 1 year (365 days)
+            hideCookieBanner();
+        }
+
+        function hideCookieBanner() {
+            document.querySelector('.cookies-consent-container').style.display = 'none';
+        }
+
+        function showCookieBanner() {
+            document.querySelector('.cookies-consent-container').style.display = 'block';
+        }
+
+        // Check if the user has already accepted cookies
+        function checkCookies() {
+            var cookiesAccepted = getCookie("cookies_accepted");
+            if (cookiesAccepted === "true") {
+                hideCookieBanner();
+            } else {
+                showCookieBanner();
+            }
+        }
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Check cookies when the page loads
+        window.onload = checkCookies;
+
+        function aksiLogout() {
+            swal({
+                    title: "Keluar?",
+                    text: "Kamu yakin mau keluar?",
+                    icon: "warning",
+                    buttons: ["Batal", "Ya"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location.assign("/signout");
+                    } else {
+                        swal("Batal", "Anda tidak keluar.", "info");
+                    }
+                });
+
+        }
+    </script>
+</body>
+
+
+
+
+</html>
